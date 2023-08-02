@@ -40,23 +40,29 @@ const pecas = {
 controle.forEach( (elemento) => {
     elemento.addEventListener ("click", (evento) => {
         manipulaDados(evento.target.dataset.controle, evento.target.parentNode)
-        atualizaEstatistica(evento.target.dataset.peca)
+        atualizaEstatistica(evento.target.dataset.controle, evento.target.dataset.peca)
+        /*console.log(elemento)*/
     })
 })
 
 function manipulaDados(operacao, controle) {
     const peca = controle.querySelector("[data-contador]");
-
     if(operacao === "-") {
         peca.value = parseInt(peca.value) - 1
     } else {
         peca.value = parseInt(peca.value) + 1
+        console.log(peca.value)
     }
+    /*console.log(operacao)*/
 }
 
-function atualizaEstatistica(peca) {
+function atualizaEstatistica(operacao,peca) {
     estatisticas.forEach( (elemento) => {
-        elemento.textContent = parseInt(elemento.textContent) + pecas[peca] [elemento.dataset.estatistica]
+            if(operacao === "-"){
+                elemento.textContent = parseInt(elemento.textContent) - pecas[peca] [elemento.dataset.estatistica]
+            } else{
+         elemento.textContent = parseInt(elemento.textContent) + pecas[peca] [elemento.dataset.estatistica]
+    }
     })
 }
 
